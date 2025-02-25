@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <!-- Load: foundation-float.min.css: Compressed CSS with legacy Float Grid -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css"
+          integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
+
+    <!-- Load: foundation-prototype.min.css: Compressed CSS with prototyping classes -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css"
+          integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
+
+    <!-- Load: custom css file -->
+    <link rel="stylesheet" href="./uploads/Theoretische%20Informatik/DEA/css/custom.css" />
+    <!--<link rel="stylesheet" href="css/custom.css" />-->
+    <!-- Load: foundation icons -->
+    <link rel="stylesheet" href="./uploads/Theoretische%20Informatik/DEA/icons/foundation-icons/foundation-icons.css" />
+    <!--<link rel="stylesheet" href="icons/foundation-icons/foundation-icons.css" />-->
+    <!-- Compressed JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
+            integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"
+            integrity="sha512-9cXmvmK1gIDw3Tol6Xg/1SUls/CvBMgedu1aDjT519sQzy7jk+LoezyQqlzClW2LgXww4xEyuqtofg7PtWteLQ=="
+            crossorigin="anonymous"></script>
+
+    <title>DEA - Deterministischer endlicher Automat</title>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="medium-5 large-4 cell">
+                <h3>Embedded Reber Grammatik</h3>
+
+                <!-- BEGINN: Section Inputtextfield -->
+                <div class="row">
+                    <div class="columns small-6 large-2">
+                        <label for="reberTextfield">Reber String:</label>
+                    </div>
+                    <div class="columns small-6 large-8">
+                        <input type="text" id="reberTextfield" oninput="this.value = this.value.toUpperCase()"
+                               maxlength="20" autofocus />
+                    </div>
+                    <div class="columns small-12 large-2">
+                        <button id="activateInfo">
+                            <i data-tooltip class="fi-info has-tip" title="Hilfe anzeigen"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- END: Section Inputtextfield -->
+                <!-- BEGINN: Section Textcount -->
+                <div id="textLimit" class="text-right"></div>
+                <!-- END: Section Textcount -->
+                <!-- BEGINN: Section Buttons -->
+                <div class="secondary expanded small button-group">
+                    <a class="button" id="startBtn">Start</a>
+                    <a class="button" id="randomBtn">Zufallssimulation</a>
+                    <a class="button" id="restartBtn">Neustart</a>
+                </div>
+                <!-- END: Section Buttons -->
+                <!-- BEGINN: Section Range Slider -->
+                <span>Animations Geschwindigkeit</span>
+                <div class="grid-x grid-margin-x">
+                    <div class="cell small-10">
+                        <div class="slider" data-slider data-initial-start="1" data-start="1" data-end="5">
+                            <span class="slider-handle" data-slider-handle role="slider" tabindex="1"
+                                  aria-controls="sliderOutput1"></span>
+                            <span class="slider-fill" data-slider-fill></span>
+                        </div>
+                    </div>
+                    <div class="cell small-2">
+                        <input type="number" id="sliderOutput1">
+                    </div>
+                </div>
+                <!-- END: Section Range Slider -->
+                <!-- BEGINN: Section Log area -->
+                <label>Console<select multiple id="log"></select></label>
+                <!-- END: Section Log area -->
+                <!-- BEGINN: Section User Info -->
+                <!-- Enable info, On default: style="display: none;" -->
+                <div style="display: none;" id="helpInfo">
+                    <!-- BEGINN: Section Subheader -->
+                    <p class="subheader text-justify">
+                        Dieses interaktive Javascript Applet simuliert einen
+                        <span data-tooltip class="has-tip left" title="Deterministischen endlichen Automaten">DEA</span>
+                        auf der Basis der Embedded Reber Grammatik.
+                        <br>
+                        Bitte geben Sie ihre beliebige Zeichenkette in das nachfolgende Textfeld ein. Hierbei ist eine maximale
+                        l&auml;nge von 20 Zeichen erlaubt. Die &Uuml;berpr&uuml;fung der Eingabe erfolgt kurz darauf und gibt
+                        diese simuliert und in der unteren Tabelle dieser Seite entweder als korrekte Grammatik oder als
+                        fehlerhafte Grammatik wieder.
+                        <br>
+                        Mittels des Sliders k&ouml;nnen Sie die Simulationsgeschwindigkeit in Sekunden beeinflussen, wobei
+                        eine 1 f&uuml;r 1 sekunde und 5 f&uuml;r 5 sekunden steht.
+                    </p>
+                    <!-- END: Section Subheader -->
+
+                    <span class="subheader">
+                        Beispieleingaben für akzeptierte W&ouml;rter:
+                    </span>
+                    <ol class="subheader">
+                        <li>BPBTSSSXXSSSSSVVEPE</li>
+                        <li>BPBPVPSEPE</li>
+                        <li>BTBPTVVETE</li>
+                    </ol>
+                    <span class="subheader">
+                        Beispieleingaben für nicht akzeptierte W&ouml;rter:
+                    </span>
+                    <ol class="subheader">
+                        <li>BTBPSVVETE</li>
+                        <li>BPBPVPXVPSWEPE</li>
+                        <li>BTXBPVVETE</li>
+                    </ol>
+                </div>
+                <!-- END: Section User Info -->
+                <!-- BEGINN: Section Warning message START: disabled, on default -->
+                <div class="callout warning" style="display: none;" id="warning" data-closable>
+                    <p class="subheader">
+                        <span>Animation beendet! <br> Starten Sie das Programm erneut.</span>
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
+                </div>
+                <!-- END: Section Warning message -->
+
+            </div>
+            <div class="medium-5 large-2 cell">
+                <!-- Set canvas width, height on html document to prevent blurry images -->
+                <canvas id="canvas" width="800" height="500">Your browser does not support the HTML 5 Canvas.</canvas>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row small-up-2">
+            <div class="column">
+                <h5>Reber Grammar</h5>
+                <ul id="correctReberGrammar"></ul>
+            </div>
+            <div class="column">
+                <h5>Non-Reber Grammar</h5>
+                <ul id="incorrectReberGrammar"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load external script files -->
+    <script>
+        // Returns the page location type
+        locationType();
+
+        function locationType() {
+            // Script file is running on local host: Local file, direct from disk (file://path/to/file.html)
+            if (window.location.protocol == 'file:') {
+                document.write("<script src='jscript/dea.js'><\/script>");
+                console.log('Running: Offline');
+            } else {
+                document.write("<script src='./uploads/Theoretische%20Informatik/DEA/jscript/dea.js'><\/script>");
+                console.log('Running: Online');
+            }
+        }
+    </script>
+</body>
+</html>
