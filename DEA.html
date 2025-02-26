@@ -15,10 +15,10 @@
           integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
 
     <!-- Load: custom css file -->
-    <link rel="stylesheet" href="./uploads/Theoretische%20Informatik/DEA/css/custom.css" />
+    <link rel="stylesheet" href="./css/custom.css" />
     <!--<link rel="stylesheet" href="css/custom.css" />-->
     <!-- Load: foundation icons -->
-    <link rel="stylesheet" href="./uploads/Theoretische%20Informatik/DEA/icons/foundation-icons/foundation-icons.css" />
+    <link rel="stylesheet" href="./icons/foundation-icons/foundation-icons.css" />
     <!--<link rel="stylesheet" href="icons/foundation-icons/foundation-icons.css" />-->
     <!-- Compressed JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
@@ -157,10 +157,10 @@
         function locationType() {
             // Script file is running on local host: Local file, direct from disk (file://path/to/file.html)
             if (window.location.protocol == 'file:') {
-                document.write("<script src='jscript/dea.js'><\/script>");
+                document.write("<script src='./jscript/dea.js'><\/script>");
                 console.log('Running: Offline');
             } else {
-                document.write("<script src='./uploads/Theoretische%20Informatik/DEA/jscript/dea.js'><\/script>");
+                document.write("<script src='./jscript/dea.js'><\/script>");
                 console.log('Running: Online');
             }
         }
